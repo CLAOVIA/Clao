@@ -10,34 +10,14 @@ import {
     LayoutGrid,
     Zap,
     ArrowRight,
-    ShieldCheck,
     Lock
 } from "lucide-react";
-import { useState } from "react";
 
 export default function OnboardingPage() {
-    const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        setIsLoading(true);
-
-        // In a real app, you might validate manager email via API here
-
-        const formData = new FormData(e.currentTarget);
-        const userName = formData.get("userName") as string;
-        const managerEmail = formData.get("managerEmail") as string;
-
-        // Redirect to Typebot
-        const baseUrl = "https://typebot.co/claovia-rex-clao-ia-05gi2vb";
-        const params = new URLSearchParams();
-        if (managerEmail) params.append('Manager Email', managerEmail);
-        if (userName) params.append('Prénom', userName);
-
-        // Simulate delay for effect
-        setTimeout(() => {
-            window.location.href = `${baseUrl}?${params.toString()}`;
-        }, 800);
+    const handleStart = () => {
+        // Redirect directly to Typebot
+        window.location.href = "https://typebot.co/claovia-rex-clao-ia-05gi2vb";
     };
 
     return (
@@ -148,55 +128,20 @@ export default function OnboardingPage() {
                     </div>
                 </div>
 
-                {/* The Hook Button - Form */}
-                <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-2xl border border-stone-100 animate-slide-up text-center" style={{ animationDelay: '0.6s' }}>
-                    <h3 className="text-xl font-bold text-sage-900 mb-6">Lancer votre REX</h3>
+                {/* Simple CTA Button */}
+                <div className="w-full max-w-md animate-slide-up text-center" style={{ animationDelay: '0.6s' }}>
+                    <button
+                        onClick={handleStart}
+                        className="w-full bg-sage-800 hover:bg-sage-900 text-white font-bold py-5 px-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all hover:-translate-y-1 flex items-center justify-center gap-3 text-xl group"
+                    >
+                        Commencer maintenant
+                        <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    </button>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="userName" className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2 text-left ml-1">Prénom</label>
-                            <input
-                                type="text"
-                                name="userName"
-                                id="userName"
-                                placeholder="Ex: Thomas"
-                                className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-sage-500"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="managerEmail" className="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-2 text-left ml-1">Email Manager</label>
-                            <input
-                                type="email"
-                                name="managerEmail"
-                                id="managerEmail"
-                                required
-                                placeholder="manager@entreprise.com"
-                                className="w-full px-4 py-3 rounded-xl bg-stone-50 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-sage-500"
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={isLoading}
-                            className="w-full bg-sage-800 hover:bg-sage-900 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2 text-lg disabled:opacity-70 disabled:cursor-not-allowed group"
-                        >
-                            {isLoading ? (
-                                <>
-                                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    Lancement...
-                                </>
-                            ) : (
-                                <>
-                                    Commencer <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </>
-                            )}
-                        </button>
-                    </form>
-
-                    <div className="mt-6 pt-6 border-t border-stone-100 flex justify-center gap-6 text-[10px] text-stone-400 font-medium">
-                        <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3 text-green-500" /> Traitement confidentiel</span>
-                        <span className="flex items-center gap-1"><Lock className="w-3 h-3 text-sage-500" /> Données chiffrées</span>
-                    </div>
+                    <p className="mt-4 text-sm text-stone-400 flex items-center justify-center gap-2">
+                        <Lock className="w-4 h-4" />
+                        Données chiffrées et confidentielles
+                    </p>
                 </div>
 
             </main>
