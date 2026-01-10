@@ -1,6 +1,18 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GENERATIVE_AI_API_KEY!);
+// Lazy initialization pour éviter les erreurs au build time
+let genAIInstance: GoogleGenerativeAI | null = null;
+
+function getGenAI(): GoogleGenerativeAI {
+  if (!genAIInstance) {
+    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    if (!apiKey) {
+      throw new Error('GOOGLE_GENERATIVE_AI_API_KEY non configurée');
+    }
+    genAIInstance = new GoogleGenerativeAI(apiKey);
+  }
+  return genAIInstance;
+}
 
 // Types pour le feedback structuré
 export interface TypebotPayload {
@@ -317,7 +329,7 @@ RÈGLES STRICTES :
 `;
 
 export async function analyzeRexFeedback(payload: TypebotPayload): Promise<RexAnalysis> {
-  const model = genAI.getGenerativeModel({
+  const model = getGenAI().getGenerativeModel({
     model: 'gemini-1.5-pro',
     generationConfig: {
       temperature: 0.7,
