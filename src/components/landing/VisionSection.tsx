@@ -10,7 +10,9 @@ import {
     Compass,
     AlertTriangle,
     ArrowDown,
-    Sparkles
+    Sparkles,
+    Eye,
+    Lightbulb
 } from "lucide-react";
 
 export function VisionSection() {
@@ -78,8 +80,12 @@ export function VisionSection() {
     };
 
     return (
-        <section className="py-24 bg-white relative" id="vision">
-            <div className="max-w-5xl mx-auto px-6">
+        <section className="py-24 bg-white relative overflow-hidden" id="vision">
+            {/* Background decoration */}
+            <div className="absolute top-0 left-0 w-96 h-96 bg-sage-50 rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-96 h-96 bg-sage-50 rounded-full blur-3xl opacity-50 translate-x-1/2 translate-y-1/2" />
+
+            <div className="max-w-5xl mx-auto px-6 relative z-10">
 
                 {/* Header */}
                 <div className="text-center mb-16">
@@ -101,13 +107,62 @@ export function VisionSection() {
                     </motion.div>
                 </div>
 
-                {/* La Genèse Card */}
+                {/* Le Constat - Cards Grid */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="grid md:grid-cols-2 gap-6 mb-12"
+                >
+                    {/* Card 1: Le Constat */}
+                    <div className="bg-gradient-to-br from-stone-50 to-stone-100 rounded-3xl p-8 border border-stone-200">
+                        <div className="flex items-start gap-4 mb-4">
+                            <div className="w-12 h-12 bg-stone-200 rounded-2xl flex items-center justify-center text-stone-600 shrink-0">
+                                <Eye className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-sage-900 mb-2">Le Constat</h3>
+                                <p className="text-stone-600 leading-relaxed">
+                                    Les mêmes processus se répètent : des dysfonctionnements humains que personne n&apos;osait nommer.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="mt-4 p-4 bg-white/60 rounded-xl border border-stone-200">
+                            <p className="text-sm text-stone-500 italic">
+                                &quot;On promouvait les meilleurs techniciens au poste de manager, sans leur donner les outils pour réussir cette transition.&quot;
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Card 2: La Solution */}
+                    <div className="bg-gradient-to-br from-sage-50 to-sage-100 rounded-3xl p-8 border border-sage-200">
+                        <div className="flex items-start gap-4 mb-4">
+                            <div className="w-12 h-12 bg-sage-500 rounded-2xl flex items-center justify-center text-white shrink-0">
+                                <Lightbulb className="w-6 h-6" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold text-sage-900 mb-2">Notre Réponse</h3>
+                                <p className="text-stone-600 leading-relaxed">
+                                    Augmenter le manager de proximité avec l&apos;IA pour qu&apos;il puisse enfin écouter, comprendre et agir.
+                                </p>
+                            </div>
+                        </div>
+                        <div className="mt-4 p-4 bg-white/60 rounded-xl border border-sage-200">
+                            <p className="text-sm text-sage-700 font-medium">
+                                L&apos;IA gère l&apos;écoute et l&apos;analyse. Le manager garde le lien humain.
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* La Genèse - Accordion */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="bg-sage-50 rounded-3xl p-8 md:p-12 mb-8"
+                    className="bg-sage-50 rounded-3xl p-8 md:p-10"
                 >
                     <div className="flex items-start gap-4 mb-6">
                         <div className="w-12 h-12 bg-sage-500 rounded-2xl flex items-center justify-center text-white shrink-0">
@@ -116,7 +171,7 @@ export function VisionSection() {
                         <div>
                             <h3 className="text-2xl font-bold text-sage-900 mb-2">La Genèse</h3>
                             <p className="text-stone-600">
-                                Les mêmes processus se répètent : des dysfonctionnements humains que personne n&apos;osait nommer.
+                                Comprendre le cycle d&apos;évolution professionnelle et ses pièges structurels.
                             </p>
                         </div>
                     </div>
@@ -124,15 +179,18 @@ export function VisionSection() {
                     {/* Accordion Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
-                        className="w-full flex items-center justify-between p-4 bg-white rounded-2xl border border-sage-200 hover:border-sage-300 transition-all group"
+                        className="w-full flex items-center justify-between p-5 bg-white rounded-2xl border border-sage-200 hover:border-sage-300 hover:shadow-md transition-all group"
                     >
-                        <span className="font-semibold text-sage-800">
-                            Découvrir le schéma d&apos;évolution
-                        </span>
+                        <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-sage-500 animate-pulse" />
+                            <span className="font-semibold text-sage-800">
+                                {isOpen ? "Masquer le schéma d'évolution" : "Découvrir le schéma d'évolution"}
+                            </span>
+                        </div>
                         <motion.div
                             animate={{ rotate: isOpen ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
-                            className="w-8 h-8 bg-sage-100 rounded-full flex items-center justify-center text-sage-600 group-hover:bg-sage-200 transition-colors"
+                            className="w-10 h-10 bg-sage-100 rounded-full flex items-center justify-center text-sage-600 group-hover:bg-sage-200 transition-colors"
                         >
                             <ChevronDown className="w-5 h-5" />
                         </motion.div>
@@ -148,86 +206,100 @@ export function VisionSection() {
                                 transition={{ duration: 0.4, ease: "easeInOut" }}
                                 className="overflow-hidden"
                             >
-                                <div className="pt-8 space-y-0">
-                                    {steps.map((step, index) => {
-                                        const colors = getColorClasses(step.color);
-                                        const Icon = step.icon;
+                                <div className="pt-8">
+                                    {/* Timeline */}
+                                    <div className="relative">
+                                        {/* Vertical Line */}
+                                        <div className="absolute left-7 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-200 via-sage-300 to-purple-200" />
 
-                                        return (
-                                            <div key={step.id}>
-                                                {/* Step Card */}
+                                        {steps.map((step, index) => {
+                                            const colors = getColorClasses(step.color);
+                                            const Icon = step.icon;
+
+                                            return (
                                                 <motion.div
-                                                    initial={{ opacity: 0, x: -20 }}
+                                                    key={step.id}
+                                                    initial={{ opacity: 0, x: -30 }}
                                                     animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                                                    className={`relative flex items-start gap-6 p-6 bg-white rounded-2xl border ${colors.border} mb-4`}
+                                                    transition={{ duration: 0.5, delay: index * 0.15 }}
+                                                    className="relative mb-8 last:mb-0"
                                                 >
-                                                    {/* Icon */}
-                                                    <div className={`w-14 h-14 ${colors.light} rounded-2xl flex items-center justify-center ${colors.text} shrink-0`}>
-                                                        <Icon className="w-7 h-7" />
+                                                    {/* Step Card */}
+                                                    <div className="flex items-start gap-6 ml-0">
+                                                        {/* Icon Circle */}
+                                                        <div className={`relative z-10 w-14 h-14 ${colors.light} rounded-2xl flex items-center justify-center ${colors.text} shrink-0 border-4 border-white shadow-lg`}>
+                                                            <Icon className="w-6 h-6" />
+                                                        </div>
+
+                                                        {/* Content */}
+                                                        <div className={`flex-1 bg-white rounded-2xl p-6 border ${colors.border} shadow-sm hover:shadow-md transition-shadow`}>
+                                                            <h4 className="font-bold text-sage-900 text-lg mb-2">{step.title}</h4>
+                                                            <p className="text-sage-700 font-medium italic mb-2">&quot;{step.quote}&quot;</p>
+                                                            {step.result && (
+                                                                <p className="text-sm text-stone-500 bg-stone-50 px-3 py-1.5 rounded-lg inline-block">
+                                                                    {step.result}
+                                                                </p>
+                                                            )}
+                                                        </div>
                                                     </div>
 
-                                                    {/* Content */}
-                                                    <div className="flex-1">
-                                                        <h4 className="font-bold text-sage-900 text-lg mb-1">{step.title}</h4>
-                                                        <p className="text-sage-700 font-medium italic mb-2">&quot;{step.quote}&quot;</p>
-                                                        {step.result && (
-                                                            <p className="text-sm text-stone-500">{step.result}</p>
-                                                        )}
-                                                    </div>
-                                                </motion.div>
+                                                    {/* Trap Card */}
+                                                    {step.trap && (
+                                                        <motion.div
+                                                            initial={{ opacity: 0, y: -10 }}
+                                                            animate={{ opacity: 1, y: 0 }}
+                                                            transition={{ duration: 0.4, delay: index * 0.15 + 0.2 }}
+                                                            className="relative ml-20 mt-4"
+                                                        >
+                                                            {/* Connector */}
+                                                            <div className="absolute -top-4 left-0 flex flex-col items-center">
+                                                                <div className="w-0.5 h-4 bg-red-200" />
+                                                                <ArrowDown className="w-4 h-4 text-red-300 -mt-1" />
+                                                            </div>
 
-                                                {/* Trap Card (if exists) */}
-                                                {step.trap && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, scale: 0.95 }}
-                                                        animate={{ opacity: 1, scale: 1 }}
-                                                        transition={{ duration: 0.4, delay: index * 0.1 + 0.1 }}
-                                                        className="relative ml-8 md:ml-16 mb-6"
-                                                    >
-                                                        {/* Arrow */}
-                                                        <div className="absolute -top-2 left-6 w-0.5 h-4 bg-red-200" />
-                                                        <ArrowDown className="absolute -top-1 left-[18px] w-4 h-4 text-red-300" />
-
-                                                        <div className="bg-red-50 border border-red-100 rounded-xl p-5 mt-4">
-                                                            <div className="flex items-start gap-3">
-                                                                <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center text-red-500 shrink-0">
-                                                                    <AlertTriangle className="w-4 h-4" />
-                                                                </div>
-                                                                <div>
-                                                                    <p className="text-xs font-bold text-red-600 uppercase tracking-wide mb-1">
-                                                                        {step.trap.title}
-                                                                    </p>
-                                                                    <p className="font-semibold text-red-800 mb-1">
-                                                                        {step.trap.subtitle}
-                                                                    </p>
-                                                                    <p className="text-sm text-red-700">
-                                                                        {step.trap.description}
-                                                                    </p>
+                                                            <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-100 rounded-xl p-5 ml-4">
+                                                                <div className="flex items-start gap-3">
+                                                                    <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-red-500 shrink-0">
+                                                                        <AlertTriangle className="w-5 h-5" />
+                                                                    </div>
+                                                                    <div>
+                                                                        <p className="text-xs font-bold text-red-600 uppercase tracking-wider mb-1">
+                                                                            {step.trap.title}
+                                                                        </p>
+                                                                        <p className="font-semibold text-red-800 mb-1">
+                                                                            {step.trap.subtitle}
+                                                                        </p>
+                                                                        <p className="text-sm text-red-700">
+                                                                            {step.trap.description}
+                                                                        </p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                                                        </motion.div>
+                                                    )}
+                                                </motion.div>
+                                            );
+                                        })}
+                                    </div>
 
-                                {/* Conclusion */}
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.4, delay: 0.5 }}
-                                    className="mt-8 p-6 bg-sage-900 rounded-2xl text-center"
-                                >
-                                    <p className="text-sage-100 text-lg font-medium mb-2">
-                                        À chaque niveau, la compétence qui a permis la promotion devient insuffisante.
-                                    </p>
-                                    <p className="text-sage-300 text-sm">
-                                        Claovia augmente le manager de proximité pour qu&apos;il réussisse cette transition.
-                                    </p>
-                                </motion.div>
+                                    {/* Conclusion */}
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.5, delay: 0.7 }}
+                                        className="mt-10 p-6 bg-sage-900 rounded-2xl text-center relative overflow-hidden"
+                                    >
+                                        <div className="absolute inset-0 bg-gradient-to-r from-sage-800/50 to-sage-900/50" />
+                                        <div className="relative z-10">
+                                            <p className="text-sage-100 text-lg font-medium mb-2">
+                                                À chaque niveau, la compétence qui a permis la promotion devient insuffisante.
+                                            </p>
+                                            <p className="text-sage-300 text-sm">
+                                                Claovia augmente le manager de proximité pour qu&apos;il réussisse cette transition critique.
+                                            </p>
+                                        </div>
+                                    </motion.div>
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>

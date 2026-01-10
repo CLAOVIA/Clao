@@ -10,7 +10,9 @@ import {
     LayoutGrid,
     Zap,
     ArrowRight,
-    Lock
+    Lock,
+    ArrowLeft,
+    Home
 } from "lucide-react";
 
 export default function OnboardingPage() {
@@ -23,11 +25,31 @@ export default function OnboardingPage() {
     return (
         <div className="min-h-screen flex flex-col bg-sage-50 text-stone-600 font-sans selection:bg-sage-200 selection:text-sage-900">
 
-            {/* Simple Header */}
-            <header className="py-6 px-6 flex justify-center">
-                <Link href="/" className="group transition-opacity hover:opacity-80">
-                    <span className="font-bold text-2xl text-sage-900 tracking-tight">Claovia</span>
-                </Link>
+            {/* Navigation Header */}
+            <header className="py-4 px-6 bg-white/80 backdrop-blur-sm border-b border-stone-100 sticky top-0 z-50">
+                <div className="max-w-4xl mx-auto flex items-center justify-between">
+                    {/* Back to home */}
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 text-sm text-stone-500 hover:text-sage-700 transition-colors group"
+                    >
+                        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                        <span className="hidden sm:inline">Retour au site</span>
+                    </Link>
+
+                    {/* Logo */}
+                    <Link href="/" className="group transition-opacity hover:opacity-80">
+                        <span className="font-bold text-2xl text-sage-900 tracking-tight">Claovia</span>
+                    </Link>
+
+                    {/* Home icon (mobile) */}
+                    <Link
+                        href="/"
+                        className="flex items-center gap-2 text-sm text-stone-500 hover:text-sage-700 transition-colors"
+                    >
+                        <Home className="w-5 h-5" />
+                    </Link>
+                </div>
             </header>
 
             <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-8 md:py-12 flex flex-col items-center">
@@ -147,7 +169,12 @@ export default function OnboardingPage() {
             </main>
 
             <footer className="text-center py-8 text-[10px] text-stone-400 border-t border-stone-100 bg-white">
-                © 2026 Claovia. Tous droits réservés.
+                <div className="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <span>© 2026 Claovia. Tous droits réservés.</span>
+                    <Link href="/" className="text-sage-600 hover:text-sage-800 transition-colors">
+                        Retour à l&apos;accueil
+                    </Link>
+                </div>
             </footer>
         </div>
     );
