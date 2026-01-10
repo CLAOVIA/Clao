@@ -1,6 +1,18 @@
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+// Initialisation lazy pour éviter les erreurs au build time
+let resendInstance: Resend | null = null
+
+function getResend(): Resend {
+  if (!resendInstance) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey || apiKey === 're_123456789') {
+      throw new Error('RESEND_API_KEY non configurée ou invalide')
+    }
+    resendInstance = new Resend(apiKey)
+  }
+  return resendInstance
+}
 
 interface ManagerEmailParams {
   to: string
@@ -15,7 +27,7 @@ export async function sendManagerReportEmail(params: ManagerEmailParams) {
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'Claovia <notifications@claovia.com>',
     to,
     subject: '🎯 Nouveau REX disponible',
@@ -60,7 +72,7 @@ interface CollaboratorEmailParams {
 export async function sendCollaboratorConfirmationEmail(params: CollaboratorEmailParams) {
   const { to, collaboratorName, summary } = params
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'Claovia <notifications@claovia.com>',
     to,
     subject: '✅ Votre retour a bien été pris en compte',
