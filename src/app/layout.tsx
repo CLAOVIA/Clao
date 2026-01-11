@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Claovia - Transformez chaque feedback en action",
+  title: "Claovia - Transformez chaque retour d'expérience en action",
   description: "L'IA qui donne a vos managers les outils pour comprendre et agir. 93% des salaries ne se sentent pas ecoutes. Changez ca.",
   keywords: ["RH", "feedback", "manager", "collaborateur", "IA", "REX", "retour experience"],
   openGraph: {
