@@ -300,12 +300,12 @@ export function HeroPremium() {
                             transition={{ duration: 0.7, delay: 0.1 }}
                             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-sage-900 tracking-tight leading-[1.1] mb-6"
                         >
-                            <span className="block">Transformez chaque</span>
+                            <span className="block">Transformez le</span>
                             <span className="relative inline-block">
                                 <span
                                     className="relative z-10 bg-gradient-to-r from-sage-700 via-sage-600 to-sage-500 bg-clip-text text-transparent"
                                 >
-                                    retour d&apos;experience
+                                    ressenti collaborateur
                                 </span>
                                 <motion.span
                                     initial={{ scaleX: 0, opacity: 0 }}
@@ -322,7 +322,7 @@ export function HeroPremium() {
                                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
                                     transition={{ delay: 1.2, duration: 0.5, type: "spring", stiffness: 200 }}
                                 >
-                                    <span className="relative z-10 text-sage-600">action</span>
+                                    <span className="relative z-10 text-sage-600">levier de performance</span>
                                     <motion.span
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
@@ -347,7 +347,7 @@ export function HeroPremium() {
                             transition={{ duration: 0.7, delay: 0.2 }}
                             className="text-lg text-stone-600 max-w-lg mb-10 leading-relaxed"
                         >
-                            <strong>93% des salariés</strong> ne se sentent pas écoutés. Claovia donne à vos managers les outils pour <strong>comprendre et agir</strong> avant qu&apos;il ne soit trop tard.
+                            Claovia est le <strong>copilote IA</strong> qui permet aux managers opérationnels de passer du constat à l&apos;action. Collecte de REX, analyse des non-dits et génération de kits de réponse : <strong>tout est prêt en 2 minutes</strong> pour fidéliser vos talents.
                         </motion.p>
 
                         {/* CTAs */}

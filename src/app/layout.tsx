@@ -8,12 +8,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Claovia - Transformez chaque retour d'expérience en action",
-  description: "L'IA qui donne a vos managers les outils pour comprendre et agir. 93% des salaries ne se sentent pas ecoutes. Changez ca.",
-  keywords: ["RH", "feedback", "manager", "collaborateur", "IA", "REX", "retour experience"],
+  title: "Claovia - Transformez le ressenti collaborateur en levier de performance",
+  description: "Claovia est le copilote IA qui permet aux managers opérationnels de passer du constat à l'action. Collecte de REX, analyse des non-dits et génération de kits de réponse : tout est prêt en 2 minutes pour fidéliser vos talents.",
+  keywords: ["RH", "feedback", "manager", "collaborateur", "IA", "REX", "copilote IA", "fidélisation talents"],
   openGraph: {
-    title: "Claovia - Transformez chaque feedback en action",
-    description: "L'IA qui donne a vos managers les outils pour comprendre et agir.",
+    title: "Claovia - Transformez le ressenti collaborateur en levier de performance",
+    description: "Claovia est le copilote IA qui permet aux managers opérationnels de passer du constat à l'action. Collecte de REX, analyse des non-dits et génération de kits de réponse.",
     type: "website",
   },
 };
