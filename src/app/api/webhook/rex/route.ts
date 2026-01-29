@@ -1,41 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-// Build-safe Supabase client - lazy initialization
-let _supabase: SupabaseClient | null = null;
-
-function getSupabase(): SupabaseClient | null {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-    // Build-safe guard: don't initialize if env vars are missing
-    if (!supabaseUrl || !supabaseServiceKey) {
-        console.warn('Supabase env vars missing - client not initialized');
-        return null;
-    }
-
-    if (!_supabase) {
-        _supabase = createClient(supabaseUrl, supabaseServiceKey);
-    }
-    return _supabase;
-}
-
+// Simple webhook endpoint for REX (no database for MVP)
 export async function POST(request: NextRequest) {
     try {
-        const supabase = getSupabase();
-
-        if (!supabase) {
-            return NextResponse.json(
-                { error: 'Supabase not configured. Please set environment variables.' },
-                { status: 500 }
-            );
-        }
-
         const body = await request.json();
         console.log('Webhook REX reçu:', JSON.stringify(body, null, 2));
 
-        // TODO: Add your webhook processing logic here
-        // For now, just acknowledge receipt
+        // For MVP: just acknowledge receipt
+        // TODO: Add Supabase integration when database is needed
 
         return NextResponse.json({
             success: true,
@@ -57,12 +29,10 @@ export async function POST(request: NextRequest) {
 
 // Health check GET
 export async function GET() {
-    const supabase = getSupabase();
-
     return NextResponse.json({
-        status: supabase ? 'ok' : 'warning',
-        supabaseConfigured: !!supabase,
-        message: supabase ? 'Webhook REX actif' : 'Supabase non configuré',
+        status: 'ok',
+        message: 'Webhook REX actif (MVP mode)',
         timestamp: new Date().toISOString(),
     });
 }
+
