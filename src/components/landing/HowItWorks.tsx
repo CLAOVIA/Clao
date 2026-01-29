@@ -51,6 +51,27 @@ export function HowItWorks() {
                         </p>
                     </div>
                 </div>
+
+                {/* CTA Button */}
+                <div className="mt-16 text-center">
+                    <a
+                        href="https://typebot.co/l-o-l-2-svsf1j3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-8 py-4 bg-sage-800 text-white rounded-full font-bold text-lg hover:bg-sage-900 transition-all hover:scale-105 shadow-lg shadow-sage-300/30"
+                    >
+                        Commencer maintenant
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+
+                    {/* Mode Explanation */}
+                    <div className="mt-6 max-w-xl mx-auto text-xs text-stone-500 space-y-1">
+                        <p><span className="font-semibold text-emerald-600">Mode Test :</span> Le collaborateur reçoit sa synthèse et le manager reçoit le REX.</p>
+                        <p><span className="font-semibold text-blue-600">Mode Réel :</span> Le collaborateur reçoit sa synthèse et le manager reçoit également les résultats.</p>
+                    </div>
+                </div>
             </div>
         </section>
     );
